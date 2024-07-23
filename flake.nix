@@ -1,5 +1,5 @@
 {
-  description = "Node.js 22.5.1 LATEST";
+  description = "Description for the project";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -10,13 +10,13 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ ];
       systems = [ "x86_64-linux" ];
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
+      perSystem = { self, pkgs, ... }: {
         packages = {
-          nodejs22 = pkgs.stdenv.mkDerivation {
+          default = pkgs.stdenv.mkDerivation {
             name = "nodejs22.5.1";
             src = pkgs.fetchurl {
               url = "https://nodejs.org/dist/v22.5.1/node-v22.5.1-linux-x64.tar.gz";
-              sha256 = "sha256-2a7b8b8aa5c739ae55233d59f78736911a8a5da5ea1c63f0e843da270d039499";
+              sha256 = "sha256-KnuLiqXHOa5VIz1Z94c2kRqKXaXqHGPw6EPaJw0DlJk=";
             };
             installPhase = ''
               echo "installing nodejs"
@@ -26,19 +26,15 @@
           };
         };
 
-        defaultPackage = self'.packages.nodejs22;
-
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnused
             pkgs.yarn
-            self'.packages.nodejs22
+            self.packages.default
             pkgs.nodePackages.node-gyp-build
             pkgs.nodePackages.kafkajs
           ];
         };
-      };
-      flake = {
       };
     };
 }
