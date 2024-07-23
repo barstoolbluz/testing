@@ -1,9 +1,8 @@
 {
-  description = "Node.js 22.5.1 LATEST";
+  description = "Description for the project";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -26,16 +25,13 @@
           };
         };
 
-        defaultPackage = self'.packages.nodejs22;
-
         devShells.default = pkgs.mkShell {
           buildInputs = [
             pkgs.gnused
             pkgs.yarn
             self'.packages.nodejs22
             pkgs.nodePackages.node-gyp-build
-            pkgs.nodePackages.kafkajs
-          ];
+            pkgs.nodePackages.kafkajs          ];
         };
       };
       flake = {

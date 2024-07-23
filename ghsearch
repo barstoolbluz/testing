@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Prompt the user for the search terms
+terms=$(gum input --placeholder "Enter the search terms separated by spaces (e.g., flake.nix node.js)")
+
+# Convert the terms into a query string
+query=$(echo $terms | sed 's/ /+OR+/g')
+
+# Use the GitHub API to search for files across all repositories
+gh api -X GET "search/code?q=${query}" --jq '.items[] | {repository: .repository.full_name, path: .path, html_url: .html_url}'
