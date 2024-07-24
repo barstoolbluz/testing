@@ -23,7 +23,7 @@
           '';
         };
       in
-      { 
+      {
         default = nodejs;
       };
 
@@ -43,10 +43,9 @@
           '';
         };
       in
-      { 
+      {
         default = nodejs;
       };
     };
   };
 }
-
