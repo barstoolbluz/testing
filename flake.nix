@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
   };
   outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.default = 
+    packages.x86_64-linux.default =
       let
         pkgs = import nixpkgs { system = "x86_64-linux"; };
       in
@@ -15,14 +15,12 @@
           url = "https://nodejs.org/dist/v22.5.1/node-v22.5.1-linux-x64.tar.gz";
           sha256 = "sha256-KnuLiqXHOa5VIz1Z94c2kRqKXaXqHGPw6EPaJw0DlJk";
         };
-        buildInputs = [ pkgs.stdenv ];
         installPhase = ''
           mkdir -p $out
-          cp -r * $out/
+          tar -xzf $src -C $out --strip-components=1
         '';
       };
-
-    packages.x86_64-darwin.default = 
+    packages.x86_64-darwin.default =
       let
         pkgs = import nixpkgs { system = "x86_64-darwin"; };
       in
@@ -33,10 +31,9 @@
           url = "https://nodejs.org/dist/v22.5.1/node-v22.5.1-darwin-x64.tar.gz";
           sha256 = "sha256-astFM7wKQ6Ro+Qu9SSMKoWx8V7KjRR7+Ahdf7qNGdU0";
         };
-        buildInputs = [ pkgs.stdenv ];
         installPhase = ''
           mkdir -p $out
-          cp -r * $out/
+          tar -xzf $src -C $out --strip-components=1
         '';
       };
   };
