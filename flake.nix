@@ -29,7 +29,7 @@
         version = "22.5.1";
         src = pkgs.fetchurl {
           url = "https://nodejs.org/dist/v22.5.1/node-v22.5.1-darwin-x64.tar.gz";
-          sha256 = "sha256-astFM7wKQ6Ro+Qu9SSMKoWx8V7KjRR7+Ahdf7qNGdU0";
+          sha256 = "sha256-astFM7wKQ6Ro+Qu9SSMKoWx8V7KjRR7+Ahdf7qNGdU0=";
         };
         installPhase = ''
           mkdir -p $out
